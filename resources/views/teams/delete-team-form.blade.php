@@ -1,4 +1,4 @@
-<x-action-section>
+<x-action-section xmlns:flush="http://www.w3.org/1999/html">
     <x-slot name="title">
         {{ __('Delete Team') }}
     </x-slot>
@@ -8,35 +8,37 @@
     </x-slot>
 
     <x-slot name="content">
-        <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
+        <flux:subheading class="max-w-xl">
             {{ __('Once a team is deleted, all of its resources and data will be permanently deleted. Before deleting this team, please download any data or information regarding this team that you wish to retain.') }}
-        </div>
+        </flux:subheading>
 
         <div class="mt-5">
-            <x-danger-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                {{ __('Delete Team') }}
-            </x-danger-button>
+
+            <flux:modal.trigger name="delete-team">
+                <flux:button variant="danger">{{ __('Delete Team') }}</flux:button>
+            </flux:modal.trigger>
+
         </div>
 
         <!-- Delete Team Confirmation Modal -->
-        <x-confirmation-modal wire:model.live="confirmingTeamDeletion">
-            <x-slot name="title">
-                {{ __('Delete Team') }}
-            </x-slot>
+        <flux:modal name="delete-team" class="min-w-[22rem] space-y-6">
+            <div>
+                <flux:heading size="lg">{{ __('Delete Team') }}?</flux:heading>
 
-            <x-slot name="content">
-                {{ __('Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.') }}
-            </x-slot>
+                <flux:subheading>
+                    {{ __('Are you sure you want to delete this team? Once a team is deleted, all of its resources and data will be permanently deleted.') }}
+                </flux:subheading>
+            </div>
 
-            <x-slot name="footer">
-                <x-secondary-button wire:click="$toggle('confirmingTeamDeletion')" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+            <div class="flex gap-2">
+                <flux:spacer />
 
-                <x-danger-button class="ms-3" wire:click="deleteTeam" wire:loading.attr="disabled">
-                    {{ __('Delete Team') }}
-                </x-danger-button>
-            </x-slot>
-        </x-confirmation-modal>
+                <flux:modal.close>
+                    <flux:button variant="ghost">{{ __('Cancel') }}</flux:button>
+                </flux:modal.close>
+
+                <flux:button wire:click="deleteTeam" variant="danger">{{ __('Delete Team') }}</flux:button>
+            </div>
+        </flux:modal>
     </x-slot>
 </x-action-section>

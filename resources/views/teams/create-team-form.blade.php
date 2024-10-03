@@ -9,28 +9,24 @@
 
     <x-slot name="form">
         <div class="col-span-6">
-            <x-label value="{{ __('Team Owner') }}" />
+            <flux:heading>{{ __('Team Owner') }}</flux:heading>
 
-            <div class="flex items-center mt-2">
+            <div class="flex items-center mt-4">
                 <img class="w-12 h-12 rounded-full object-cover" src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}">
 
                 <div class="ms-4 leading-tight">
-                    <div class="text-gray-900 dark:text-white">{{ $this->user->name }}</div>
-                    <div class="text-gray-700 dark:text-gray-300 text-sm">{{ $this->user->email }}</div>
+                    <flux:heading>{{ $this->user->name }}</flux:heading>
+                    <flux:subheading>{{ $this->user->email }}</flux:subheading>
                 </div>
             </div>
         </div>
 
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Team Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" autofocus />
-            <x-input-error for="name" class="mt-2" />
+            <flux:input label="{{ __('Team Name') }}" type="text" wire:model="state.name" autofocus />
         </div>
     </x-slot>
 
     <x-slot name="actions">
-        <x-button>
-            {{ __('Create') }}
-        </x-button>
+        <flux:button variant="primary" type="submit">{{ __('Create') }}</flux:button>
     </x-slot>
 </x-form-section>

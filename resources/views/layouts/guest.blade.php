@@ -16,12 +16,15 @@
 
         <!-- Styles -->
         @livewireStyles
+        @fluxStyles
     </head>
-    <body>
-        <div class="font-sans text-gray-900 dark:text-gray-100 antialiased">
+    <body class="font-sans bg-white dark:bg-zinc-900 antialiased min-h-screen">
+        <div>
             {{ $slot }}
         </div>
 
+        <flux:toast />
         @livewireScripts
+        @fluxScripts
     </body>
 </html>

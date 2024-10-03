@@ -24,7 +24,7 @@
                                     reader.readAsDataURL($refs.photo.files[0]);
                             " />
 
-                <x-label for="photo" value="{{ __('Photo') }}" />
+                <flux:label>{{ __('Photo') }}</flux:label>
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" x-show="! photoPreview">
@@ -38,47 +38,43 @@
                     </span>
                 </div>
 
-                <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
+                <flux:button variant="outline" type="button" class="mt-2 me-2" x-on:click.prevent="$refs.photo.click()">
                     {{ __('Select A New Photo') }}
-                </x-secondary-button>
+                </flux:button>
 
                 @if ($this->user->profile_photo_path)
-                    <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
+                    <flux:button variant="outline" type="button" class="mt-2" wire:click="deleteProfilePhoto">
                         {{ __('Remove Photo') }}
-                    </x-secondary-button>
+                    </flux:button>
                 @endif
 
-                <x-input-error for="photo" class="mt-2" />
+                <flux:error name="photo" />
             </div>
         @endif
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Name') }}" />
-            <x-input id="name" type="text" class="mt-1 block w-full" wire:model="state.name" required autocomplete="name" />
-            <x-input-error for="name" class="mt-2" />
+            <flux:input label="{{ __('Name') }}" type="text" wire:model="state.name" required autocomplete="name" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
-            <x-input id="email" type="email" class="mt-1 block w-full" wire:model="state.email" required autocomplete="username" />
-            <x-input-error for="email" class="mt-2" />
+            <flux:input label="{{ __('Email') }}" type="email" wire:model="state.email" required autocomplete="username" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
-                <p class="text-sm mt-2 dark:text-white">
-                    {{ __('Your email address is unverified.') }}
-
-                    <button type="button" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" wire:click.prevent="sendEmailVerification">
+                <div class="flex flex-col text-sm space-y-2 mt-3">
+                    <flux:label>
+                        {{ __('Your email address is unverified.') }}
+                    </flux:label>
+                    <flux:link href="#" wire:click.prevent="sendEmailVerification">
                         {{ __('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
-
-                @if ($this->verificationLinkSent)
-                    <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
-                        {{ __('A new verification link has been sent to your email address.') }}
-                    </p>
-                @endif
+                    </flux:link>
+                    @if ($this->verificationLinkSent)
+                        <flux:label class="font-semibold !text-green-600">
+                            {{ __('A new verification link has been sent to your email address.') }}
+                        </flux:label>
+                    @endif
+                </div>
             @endif
         </div>
     </x-slot>
@@ -88,8 +84,8 @@
             {{ __('Saved.') }}
         </x-action-message>
 
-        <x-button wire:loading.attr="disabled" wire:target="photo">
+        <flux:button variant="primary" type="submit" wire:target="photo">
             {{ __('Save') }}
-        </x-button>
+        </flux:button>
     </x-slot>
 </x-form-section>

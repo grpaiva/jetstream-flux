@@ -12,24 +12,22 @@
         <x-slot name="form">
             <!-- Token Name -->
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="name" value="{{ __('Token Name') }}" />
-                <x-input id="name" type="text" class="mt-1 block w-full" wire:model="createApiTokenForm.name" autofocus />
-                <x-input-error for="name" class="mt-2" />
+                <flux:input
+                    label="{{ __('Token Name') }}"
+                    wire:model="createApiTokenForm.name"
+                    autofocus
+                    required
+                />
             </div>
 
             <!-- Token Permissions -->
             @if (Laravel\Jetstream\Jetstream::hasPermissions())
                 <div class="col-span-6">
-                    <x-label for="permissions" value="{{ __('Permissions') }}" />
-
-                    <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <flux:checkbox.group wire:model="createApiTokenForm.permissions" label="{{ __('Permissions') }}">
                         @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
-                            <label class="flex items-center">
-                                <x-checkbox wire:model="createApiTokenForm.permissions" :value="$permission"/>
-                                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
-                            </label>
+                            <flux:checkbox label="{{ $permission }}" value="{{ $permission }}" />
                         @endforeach
-                    </div>
+                    </flux:checkbox.group>
                 </div>
             @endif
         </x-slot>
@@ -39,9 +37,9 @@
                 {{ __('Created.') }}
             </x-action-message>
 
-            <x-button>
+            <flux:button variant="primary" type="submit">
                 {{ __('Create') }}
-            </x-button>
+            </flux:button>
         </x-slot>
     </x-form-section>
 
@@ -94,76 +92,65 @@
     @endif
 
     <!-- Token Value Modal -->
-    <x-dialog-modal wire:model.live="displayingToken">
-        <x-slot name="title">
-            {{ __('API Token') }}
-        </x-slot>
-
-        <x-slot name="content">
+    <flux:modal wire:model="displayingToken">
+        <div class="space-y-6">
             <div>
-                {{ __('Please copy your new API token. For your security, it won\'t be shown again.') }}
+                <flux:heading>{{ __('API Token') }}</flux:heading>
+                <flux:subheading>
+                    {{ __('Please copy your new API token. For your security, it won\'t be shown again.') }}
+                </flux:subheading>
             </div>
 
-            <x-input x-ref="plaintextToken" type="text" readonly :value="$plainTextToken"
-                class="mt-4 bg-gray-100 px-4 py-2 rounded font-mono text-sm text-gray-500 w-full break-all"
-                autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-                @showing-token-modal.window="setTimeout(() => $refs.plaintextToken.select(), 250)"
-            />
-        </x-slot>
+            <flux:input icon="key" value="{{ $plainTextToken }}" readonly copyable />
+        </div>
 
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$set('displayingToken', false)" wire:loading.attr="disabled">
-                {{ __('Close') }}
-            </x-secondary-button>
-        </x-slot>
-    </x-dialog-modal>
+        <div class="flex mt-4">
+            <flux:spacer />
+            <flux:button wire:click="$toggle('displayingToken')" variant="outline">{{ __('Close') }}</flux:button>
+        </div>
+    </flux:modal>
 
     <!-- API Token Permissions Modal -->
-    <x-dialog-modal wire:model.live="managingApiTokenPermissions">
-        <x-slot name="title">
-            {{ __('API Token Permissions') }}
-        </x-slot>
-
-        <x-slot name="content">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
-                    <label class="flex items-center">
-                        <x-checkbox wire:model="updateApiTokenForm.permissions" :value="$permission"/>
-                        <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
-                    </label>
-                @endforeach
+    <flux:modal wire:model="managingApiTokenPermissions">
+        <div class="space-y-6">
+            <div>
+                <flux:heading>{{ __('API Token Permissions') }}</flux:heading>
+                <flux:subheading>
+                    {{ __('Please assign the permissions for this API token.') }}
+                </flux:subheading>
             </div>
-        </x-slot>
 
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$set('managingApiTokenPermissions', false)" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-secondary-button>
+            <flux:checkbox.group wire:model="updateApiTokenForm.permissions" label="{{ __('Permissions') }}">
+                @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
+                    <flux:checkbox label="{{ $permission }}" value="{{ $permission }}" />
+                @endforeach
+            </flux:checkbox.group>
 
-            <x-button class="ms-3" wire:click="updateApiToken" wire:loading.attr="disabled">
-                {{ __('Save') }}
-            </x-button>
-        </x-slot>
-    </x-dialog-modal>
+        </div>
+
+        <div class="flex mt-4 space-x-2">
+            <flux:spacer />
+            <flux:button wire:click="$toggle('managingApiTokenPermissions')" variant="outline">{{ __('Close') }}</flux:button>
+            <flux:button wire:click="updateApiToken" variant="primary">{{ __('Save') }}</flux:button>
+        </div>
+    </flux:modal>
 
     <!-- Delete Token Confirmation Modal -->
-    <x-confirmation-modal wire:model.live="confirmingApiTokenDeletion">
-        <x-slot name="title">
-            {{ __('Delete API Token') }}
-        </x-slot>
+    <flux:modal wire:model="confirmingApiTokenDeletion">
+        <div class="space-y-6">
+            <div>
+                <flux:heading>{{ __('Delete API Token') }}</flux:heading>
+                <flux:subheading>
+                    {{ __('Are you sure you would like to delete this API token?') }}
+                </flux:subheading>
+            </div>
 
-        <x-slot name="content">
-            {{ __('Are you sure you would like to delete this API token?') }}
-        </x-slot>
+            <div class="flex mt-4 space-x-2">
+                <flux:spacer />
+                <flux:button wire:click="$toggle('confirmingApiTokenDeletion')" variant="outline">{{ __('Cancel') }}</flux:button>
+                <flux:button wire:click="deleteApiToken" variant="danger">{{ __('Delete') }}</flux:button>
+            </div>
+        </div>
 
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('confirmingApiTokenDeletion')" wire:loading.attr="disabled">
-                {{ __('Cancel') }}
-            </x-secondary-button>
-
-            <x-danger-button class="ms-3" wire:click="deleteApiToken" wire:loading.attr="disabled">
-                {{ __('Delete') }}
-            </x-danger-button>
-        </x-slot>
-    </x-confirmation-modal>
+    </flux:modal>
 </div>

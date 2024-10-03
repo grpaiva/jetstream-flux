@@ -10,29 +10,27 @@
     <x-slot name="form">
         <!-- Team Owner Information -->
         <div class="col-span-6">
-            <x-label value="{{ __('Team Owner') }}" />
+            <flux:heading>{{ __('Team Owner') }}</flux:heading>
 
-            <div class="flex items-center mt-2">
+            <div class="flex items-center mt-4">
                 <img class="w-12 h-12 rounded-full object-cover" src="{{ $team->owner->profile_photo_url }}" alt="{{ $team->owner->name }}">
 
                 <div class="ms-4 leading-tight">
-                    <div class="text-gray-900 dark:text-white">{{ $team->owner->name }}</div>
-                    <div class="text-gray-700 dark:text-gray-300 text-sm">{{ $team->owner->email }}</div>
+                    <flux:heading>{{ $team->owner->name }}</flux:heading>
+                    <flux:subheading>{{ $team->owner->email }}</flux:subheading>
                 </div>
             </div>
         </div>
 
         <!-- Team Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="name" value="{{ __('Team Name') }}" />
-
-            <x-input id="name"
-                        type="text"
-                        class="mt-1 block w-full"
-                        wire:model="state.name"
-                        :disabled="! Gate::check('update', $team)" />
-
-            <x-input-error for="name" class="mt-2" />
+            <flux:input
+                label="{{ __('Team Name') }}"
+                type="text"
+                wire:model="state.name"
+                autofocus
+                :disabled="! Gate::check('update', $team)"
+            />
         </div>
     </x-slot>
 
@@ -42,9 +40,8 @@
                 {{ __('Saved.') }}
             </x-action-message>
 
-            <x-button>
-                {{ __('Save') }}
-            </x-button>
+            <flux:button variant="primary" type="submit">{{ __('Save') }}</flux:button>
+
         </x-slot>
     @endif
 </x-form-section>
