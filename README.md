@@ -127,7 +127,7 @@ The package publishes the following views, which are fully integrated with FluxU
 
 ## About FluxUI
 
-FluxUI is a comprehensive set of UI components created by [Caleb Porzio](https://github.com/calebporzio) and [Hugo Sainte-Marie](https://github.com/hugosaintemarie). It's built with simplicity, composability, and consistency in mind, allowing developers to easily create elegant and functional UI components. The principles of FluxUI include simplicity, composability, friendliness, and brevity, all aimed at improving the app-building experience.
+FluxUI is a comprehensive set of UI components created by [Caleb Porzio](https://x.com/calebporzio) and [Hugo Sainte-Marie](https://x.com/ashugeo). It's built with simplicity, composability, and consistency in mind, allowing developers to easily create elegant and functional UI components. The principles of FluxUI include simplicity, composability, friendliness, and brevity, all aimed at improving the app-building experience.
 
 To learn more about FluxUI, check out [FluxUI’s documentation](https://fluxui.dev/docs).
 
