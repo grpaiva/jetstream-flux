@@ -55,6 +55,7 @@ php artisan jetstream-flux:publish --mode=vendor
 ```
 
 **Option 2: Replace Mode (Overwrite Existing Views)**
+
 This command will replace the existing Jetstream views directly in the `resources/views` directory:
 
 ```bash
