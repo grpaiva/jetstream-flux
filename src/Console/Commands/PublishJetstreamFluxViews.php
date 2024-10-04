@@ -2,9 +2,13 @@
 
 namespace Grpaiva\JetstreamFlux\Console\Commands;
 
+use Flux\Flux;
 use Illuminate\Console\Command;
 use Exception;
 use Grpaiva\JetstreamFlux\JetstreamFluxServiceProvider;
+use Illuminate\Foundation\Application;
+use Laravel\Jetstream\Jetstream;
+use Livewire\Livewire;
 
 class PublishJetstreamFluxViews extends Command
 {
@@ -39,12 +43,22 @@ class PublishJetstreamFluxViews extends Command
     /**
      * @throws Exception
      */
-    protected function checkDependencies(): void
+    public function checkDependencies(): void
     {
-        try {
-            app(JetstreamFluxServiceProvider::class)->ensureDependenciesAreInstalled();
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
+        if (!class_exists(Application::class)) {
+            throw new \Exception('Laravel Framework is not installed.');
+        }
+
+        if (!class_exists(Jetstream::class)) {
+            throw new \Exception('Laravel Jetstream is not installed.');
+        }
+
+        if (!class_exists(Livewire::class)) {
+            throw new \Exception('Livewire is not installed.');
+        }
+
+        if (!class_exists(Flux::class)) {
+            throw new \Exception('Flux is not installed.');
         }
     }
 }
