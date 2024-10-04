@@ -10,7 +10,7 @@ class JetstreamFluxServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../resources/views' => resource_path('views'),
-        ], 'jetstream-views');
+        ], 'jetstream-flux');
     }
 
     public function register()
