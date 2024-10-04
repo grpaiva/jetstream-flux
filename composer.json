@@ -2,6 +2,7 @@
     "name": "grpaiva/jetstream-flux",
     "description": "A Laravel package to integrate Jetstream views with Flux UI.",
     "type": "library",
+    "license": "MIT",
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.0",
