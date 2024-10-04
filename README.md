@@ -65,33 +65,65 @@ php artisan jetstream-flux:publish --mode=replace --force
 
 The package publishes the following views, which are fully integrated with FluxUI components:
 
-```
-dashboard.blade.php       navigation-menu.blade.php      teams
+- `dashboard.blade.php`  
+- `navigation-menu.blade.php`
 
-./api:
-api-token-manager.blade.php    index.blade.php
 
-./auth:
-confirm-password.blade.php     login.blade.php                reset-password.blade.php       verify-email.blade.php
-forgot-password.blade.php      register.blade.php             two-factor-challenge.blade.php
+- **./api:**
+    - `api-token-manager.blade.php`
+    - `index.blade.php`
 
-./components:
-action-message.blade.php           application-mark.blade.php         banner.blade.php                   form-section.blade.php             switchable-team.blade.php
-action-section.blade.php           authentication-card-logo.blade.php confirms-password.blade.php        section-border.blade.php           validation-errors.blade.php
-application-logo.blade.php         authentication-card.blade.php      dropdown-link.blade.php            section-title.blade.php            welcome.blade.php
 
-./layouts:
-app.blade.php   guest.blade.php
+- **./auth:**
+    - `confirm-password.blade.php`
+    - `forgot-password.blade.php`
+    - `login.blade.php`
+    - `register.blade.php`
+    - `reset-password.blade.php`
+    - `two-factor-challenge.blade.php`
+    - `verify-email.blade.php`
 
-./profile:
-delete-user-form.blade.php                   show.blade.php                               update-password-form.blade.php
-logout-other-browser-sessions-form.blade.php two-factor-authentication-form.blade.php     update-profile-information-form.blade.php
 
-./teams:
-create-team-form.blade.php      delete-team-form.blade.php      team-member-manager.blade.php
-create.blade.php                show.blade.php                  update-team-name-form.blade.php
+- **./components:**
+    - `action-message.blade.php`
+    - `action-section.blade.php`
+    - `application-logo.blade.php`
+    - `application-mark.blade.php`
+    - `authentication-card-logo.blade.php`
+    - `authentication-card.blade.php`
+    - `banner.blade.php`
+    - `confirms-password.blade.php`
+    - `dropdown-link.blade.php`
+    - `form-section.blade.php`
+    - `section-border.blade.php`
+    - `section-title.blade.php`
+    - `switchable-team.blade.php`
+    - `validation-errors.blade.php`
+    - `welcome.blade.php`
 
-```
+
+- **./layouts:**
+    - `app.blade.php`
+    - `guest.blade.php`
+
+
+- **./profile:**
+    - `delete-user-form.blade.php`
+    - `logout-other-browser-sessions-form.blade.php`
+    - `show.blade.php`
+    - `two-factor-authentication-form.blade.php`
+    - `update-password-form.blade.php`
+    - `update-profile-information-form.blade.php`
+
+
+- **./teams:**
+    - `create-team-form.blade.php`
+    - `create.blade.php`
+    - `delete-team-form.blade.php`
+    - `show.blade.php`
+    - `team-member-manager.blade.php`
+    - `update-team-name-form.blade.php`
+
 
 ## About FluxUI
 
