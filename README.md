@@ -100,8 +100,19 @@ FluxUI is a comprehensive set of UI components created by [Caleb Porzio](https:/
 To learn more about FluxUI, check out [FluxUI’s documentation](https://fluxui.dev/docs).
 
 ## Screenshots
+The idea is indeed to look almost exactly like the default Jetstream views, but using FluxUI components.
 
-(soon)
+### Login Page
+![login-min.png](images/login-min.png)
+
+### Registration Page
+![registration-min.png](images/registration-min.png)
+
+### Profile Settings
+![profile-min.png](images/profile-min.png)
+
+### Team Settings
+![team-settings-min.png](images/team-settings-min.png)
 
 ## Contributing
 
