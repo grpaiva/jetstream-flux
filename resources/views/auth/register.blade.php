@@ -19,8 +19,9 @@
                 <flux:input name="password_confirmation" type="password" label="{{ __('Confirm Password') }}" required autocomplete="new-password" viewable/>
 
                 @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                    <flux:field variant="inline">
-                        <flux:checkbox wire:model="terms" />
+                    <flux:field variant="inline" x-data="{ terms: false }">
+                        <input type="checkbox" name="terms" id="terms" x-model="terms" class="hidden"/>
+                        <flux:checkbox x-model="terms"/>
                         <flux:label>
                             {!! __('I agree to the :terms_of_service and :privacy_policy', [
                                     'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">'.__('Terms of Service').'</a>',
