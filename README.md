@@ -1,3 +1,9 @@
+> **Note**
+>
+> This package is deprecated since Laravel 12's Livewire Starter Kit includes Flux UI by default.
+>
+> I recommend upgrading to Laravel 12, but you can still use it with Laravel 11 if you need to.
+
 # Jetstream Flux
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/grpaiva/jetstream-flux.svg?style=flat-square)](https://packagist.org/packages/grpaiva/jetstream-flux)
